@@ -36,3 +36,5 @@ enum class AimTarget { HEAD, BODY, NECK }
 enum class Priority { CENTER, CURSOR, NEAREST }
 enum class EspBox { HEAD, BODY, FULL }
 enum class SpinMode { CONTINUO, ON_TARGET, SNAP_SPIN }
+var showFps: Boolean = true,
+var captureScale: Float = 0.5f,
