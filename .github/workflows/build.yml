@@ -3,9 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
-  workflow_dispatch: # Permite rodar manualmente na aba "Actions"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,17 +18,14 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
 
-    - name: Dar permissão ao Gradle
-      run: chmod +x gradlew
+    - name: Configurar Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: 8.2
 
     - name: Build APK (Debug)
-      run: ./gradlew assembleDebug
-
-    # (Opcional) Build APK Release - precisa de keystore configurado
-    # - name: Build APK (Release)
-    #   run: ./gradlew assembleRelease
+      run: gradle assembleDebug
 
     - name: Salvar o APK gerado
       uses: actions/upload-artifact@v4
